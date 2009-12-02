@@ -5,8 +5,9 @@ import scala.collection.jcl.Conversions.convertList
 import _root_.com.jcraft.wave_bot.snippet.{Wavelet => MyWavelet}
 
  
-class HelloRobotScalaService extends AbstractRobotServlet {
+class MyRobotServlet extends AbstractRobotServlet {
 
+  // com.google.wave.api.Event#getParticipants will return java.util.Collection[String]
   implicit def c2i[A](c:java.util.Collection[A]):Iterator[A] = new Iterator[A]{
     val iterator = c.iterator
     def next():A = iterator.next
@@ -28,7 +29,7 @@ class HelloRobotScalaService extends AbstractRobotServlet {
     bundle.getEvents foreach { e => e.getType match{
       case WAVELET_PARTICIPANTS_CHANGED =>
         e.getAddedParticipants .
-          filter (!_.endsWith("appspot.com")) .
+          filter (!_.endsWith("appspot.com")) .  // skip robots
           foreach { participantName =>
             val blip = wavelet.appendBlip
             val textView = blip.getDocument
@@ -41,6 +42,16 @@ class HelloRobotScalaService extends AbstractRobotServlet {
         val textView = blip.getDocument
         val creatorName = e.getBlip.getCreator
         textView.append(creatorName + " said '" + submittedText + "'")
+
+        /*
+	 * val image = new Image("http://example.com/foo.jpg", width, hehgit, comment)
+	 * e.getBlip.getDocument.appendElement(image)
+	 */
+
+        /**
+	 * val gadget = new Gadget("http://example.com/gadget.xml")
+	 * e.getBlip.getDocument.appendElement(gadget)
+	 */ 
 
       case et =>
     }}
