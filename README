@@ -1,12 +1,14 @@
 Google Wave Robot Sample
 
+
 What is This
 ============
 This is a sample program to demonstrate How-To implement googlewave Robot 
 in scala/Liftweb.  This program is using Liftweb, but you will find that
-it is not essential and you can apply this sample to your favorite scala 
-based Web Application Framework. 
+the usage of Liftweb is not essential.  You will be able to apply this sample to 
+your favorite scala based Web Application Framework very easily.
 Please refer to src/main/webapp/WEB-INF/web.xml
+
 
 How to Try
 ==========
