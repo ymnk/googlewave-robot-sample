@@ -1,0 +1,14 @@
+
+The included pom.xml expects wave-robot-api-20090916.jar is stored in the repository.
+
+  * Donwload that jar file from its donwload site[1],
+  * Install that file into your repository with following command,
+    mvn install:install-file \
+      -Dfile=wave-robot-api-20090916.jar  \
+      -DgroupId=com.google.wave \
+      -DartifactId=wave-robot-api \
+      -Dversion=20090916 \
+      -Dpackaging=jar \
+      -DgeneratePom=true
+
+[1] http://code.google.com/p/wave-robot-java-client/downloads/list
