@@ -1,14 +1,56 @@
+Google Wave Robot Sample
 
-The included pom.xml expects wave-robot-api-20090916.jar is stored in the repository.
+What is This
+============
+This is a sample program to demonstrate How-To implement googlewave Robot 
+in scala/Liftweb.  This program is using Liftweb, but you will find that
+it is not essential and you can apply this sample to your favorite scala 
+based Web Application Framework. 
+Please refer to src/main/webapp/WEB-INF/web.xml
 
-  * Donwload that jar file from its donwload site[1],
-  * Install that file into your repository with following command,
-    mvn install:install-file \
-      -Dfile=wave-robot-api-20090916.jar  \
-      -DgroupId=com.google.wave \
-      -DartifactId=wave-robot-api \
-      -Dversion=20090916 \
-      -Dpackaging=jar \
-      -DgeneratePom=true
+How to Try
+==========
+1. At present time, Googleweb has expected that robots run on GAE/J.
+   So, you have to register your own application name at http://www.appspot.com/ .
+   Suppose that you have registered it as "my-robot" through this How-To.
+   This name will be used to refer to the name of your robot; my-robot@appspot.com
+
+2. Replace "????" with "my-robot" in src/main/webapp/WEB-INF/appengine-web.xml .
+
+3. The included pom.xml expects that wave-robot-api-*.jar is stored in the repository.
+     1.1 Download that jar file from its download site[1],
+     1.2 Install that file into your repository with following command,
+        mvn install:install-file \
+          -Dfile=wave-robot-api-20090916.jar  \
+          -DgroupId=com.google.wave \
+          -DartifactId=wave-robot-api \
+          -Dversion=20090916 \
+          -Dpackaging=jar \
+          -DgeneratePom=true
+
+4. Build the package
+   $ mvn package
+
+5. Deploy it!
+   appcfg.sh update target/googlewave-robot-sample-1.0-SNAPSHOT
+
+6. Add user 'my-robot@appspot.com' to your wave.
+   This sample robot will just reply to messages from participants like a parrot.
+
+
+Further References
+==================
+Please refer to following files,
+  * src/main/webapp/WEB-INF/appengine-web.xml
+  * src/main/webapp/WEB-INF/web.xml
+  * src/main/scala/bootstrap/liftweb/Boot.scala
+    You will find that the paths /_wave/* have been ignored in Liftweb.    
+  * src/main/webapp/_wave/capabilities.xml
+  * src/main/scala/com/jcraft/wave_bot/servlet/MyRobotServlet.scala
+    MyRobotServlet will handle googlewave Robot API events.
+  * src/main/scala/com/jcraft/wave_bot/snippet/Wavelet.scala
+    Demonstrating to use Googlewave Robot APIs within Liftweb.
+    This snippet will be invoked in /index.html
+
 
 [1] http://code.google.com/p/wave-robot-java-client/downloads/list
