@@ -18,12 +18,12 @@ PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
   </filter-mapping>
 
   <servlet>
-    <servlet-name>HelloRobot</servlet-name>
+    <servlet-name>MyRobot</servlet-name>
     <servlet-class>com.jcraft.wave_bot.servlet.MyRobotServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>HelloRobot</servlet-name>
+    <servlet-name>MyRobot</servlet-name>
     <url-pattern>/_wave/robot/jsonrpc</url-pattern>
   </servlet-mapping>
 
