@@ -37,21 +37,25 @@ class MyRobotServlet extends AbstractRobotServlet {
         }
 
       case BLIP_SUBMITTED =>
-        val submittedText = e.getBlip.getDocument.getText
-        val blip = e.getBlip.createChild
-        val textView = blip.getDocument
-        val creatorName = e.getBlip.getCreator
-        textView.append(creatorName + " said '" + submittedText + "'")
+        // If it is modified by robots, we will ignore this change.
+        if(!e.getBlip.getContributors.exists(_.endsWith("appspot.com"))){ 
 
-        /*
-	 * val image = new Image("http://example.com/foo.jpg", width, hehgit, comment)
-	 * e.getBlip.getDocument.appendElement(image)
-	 */
+          val submittedText = e.getBlip.getDocument.getText
+          val blip = e.getBlip.createChild
+          val textView = blip.getDocument
+          val creatorName = e.getBlip.getCreator
+          textView.append(creatorName + " said '" + submittedText + "'")
 
-        /**
-	 * val gadget = new Gadget("http://example.com/gadget.xml")
-	 * e.getBlip.getDocument.appendElement(gadget)
-	 */ 
+          /**
+           * val image = new Image("http://example.com/foo.jpg", width, hehgit, comment)
+           * e.getBlip.getDocument.appendElement(image)
+	   */
+
+          /**
+ 	   * val gadget = new Gadget("http://example.com/gadget.xml")
+	   * e.getBlip.getDocument.appendElement(gadget)
+	   */ 
+	}
 
       case et =>
     }}
