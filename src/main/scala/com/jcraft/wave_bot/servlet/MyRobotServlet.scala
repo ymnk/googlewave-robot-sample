@@ -37,8 +37,8 @@ class MyRobotServlet extends AbstractRobotServlet {
         }
 
       case BLIP_SUBMITTED =>
-        // If it is modified by robots, we will ignore this change.
-        if(!e.getBlip.getContributors.exists(_.endsWith("appspot.com"))){ 
+        // If it is modified by a robot, we will ignore this change.
+        if(!e.getModifiedBy.endsWith("@appspot.com")){
 
           val submittedText = e.getBlip.getDocument.getText
           val blip = e.getBlip.createChild
