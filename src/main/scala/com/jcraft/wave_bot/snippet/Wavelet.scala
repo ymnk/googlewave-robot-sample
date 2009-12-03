@@ -18,12 +18,16 @@ class Wavelet {
     /**
      * If w is a public wave, we will list its participants.
      */ 
-    val participants = w.getParticipants.find(_ == "public@a.gwave.com").map{_ =>
-      <ul>{w.getParticipants.map(p => <li>{participant(p)}</li>)}</ul>
-    } getOrElse(<span />)
+    val (title, participants) = 
+      w.getParticipants.find (_ == "public@a.gwave.com").map{_ =>
+      val url = "https://wave.google.com/wave/#restored:search,restored:wave:"+
+                w.getWaveId.replace("!", "%21").replace("+", "%252B")
+      (<a href={url}>{w.getTitle}</a>,
+       <ul>{w.getParticipants.map(p => <li>{participant(p)}</li>)}</ul>)
+    } getOrElse((<span>{w.getTitle}</span>, <span />))
 
     <li>
-     {w.getTitle + "(%s)".format(w.getWaveId)}
+     {title}
      {participants}
     </li>
   }
@@ -41,6 +45,10 @@ class Wavelet {
 
 object Wavelet{
   private val wavelets = Set.empty[GWavelet]
-  def +=(w:GWavelet):Unit = wavelets + w
+  def +=(w:GWavelet):Unit = {
+    if(!wavelets.exists(_.getWaveId==w.getWaveId)){
+      wavelets + w
+    } 
+  }
   def apply() = wavelets
 }
